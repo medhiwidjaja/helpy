@@ -10,10 +10,16 @@ development:
   database: helpy_development
   port: 5432
   host: localhost
+  username: helpy
+  password: Mesakh202
 
 test:
   <<: *default
   database: helpy_test
+  port: 5432
+  host: localhost
+  username: helpy
+  password: Mesakh202
 
 production:
   <<: *default
