@@ -1,6 +1,24 @@
 # Simplecov to give a report of the test coverage on local development environment
 require 'simplecov'
 SimpleCov.start 'rails'
+require 'minitest/reporters'
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true)]
+ActiveSupport::TestCase.test_order = :parallel
+
+require 'capybara/rails'
+require 'capybara/minitest'
+require 'capybara/email'
+
+class ActionDispatch::IntegrationTest
+  include Capybara::DSL
+  include Capybara::Minitest::Assertions
+  Capybara.server = :webrick
+
+  def teardown
+    Capybara.reset_sessions!
+    Capybara.use_default_driver
+  end
+end
 
 #require 'codeclimate-test-reporter'
 #CodeClimate::TestReporter.start
@@ -28,7 +46,7 @@ Capybara.register_driver :chrome do |app|
 end
 
 class ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 end
 
 def file
@@ -90,7 +108,8 @@ def set_default_settings
   AppSettings['cloudinary.cloud_name'] = ''
   AppSettings['cloudinary.api_key'] = ''
   AppSettings['cloudinary.api_secret'] = ''
-  AppSettings['theme.active'] = 'helpy'
+  AppSettings['theme.active'] = ENV['HELPY_THEME'] || 'helpy'
+  AppSettings['onboarding.complete'] = '1'
 
   # assign all agents to receive notifications
   User.agents.each do |a|

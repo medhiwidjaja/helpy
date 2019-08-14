@@ -174,6 +174,8 @@ en:
     one: "1 selected message"
     two: "2 selected messages"
     other: "%{count} selected messages"
+  mark_as: "Mark"
+  move_to: "Move"
   users_history: "%{role}'s full history"
 
   # Discussion messages
@@ -343,12 +345,15 @@ en:
   above_this_line: "Make sure your reply appears above this line"
   message_id: "Message ID"
   message_response: "The following message has been posted in response to your question:"
+  ticket_added: "You have received a new ticket. Click here to see it: %{ticket_link}"
+  response_added: "A response has been added to your ticket. Click here to see it: %{ticket_link}"
   view_online: "View this online:"
 
   # Admin notifications
   notify_new_private: "A new customer ticket has been received from %{user_name}:"
   notify_new_public: "A new public customer message has been posted by %{user_name}:"
   notify_new_reply: "A new customer reply has been received from %{user_name}:"
+  notify_user_delete: "User %{user_name} was scheduled for permanent deletion."
   to_reply: 'Reply to this message directly or online:'
 
   # Notifications settings panel
@@ -359,6 +364,7 @@ en:
   # settings
   agent_settings: "Agent Settings"
   notifications: "Notifications"
+  notifications_description:
   settings: "Settings"
   general: "General"
   general_description: "Manage general system settings like your Helpy name, what company to link back to."
@@ -406,6 +412,7 @@ en:
   # Locales
   supported_locales: Supported Locales
   default_locale: Default Locale
+  select_default_locale: "Select Default Locale..."
 
   # Widget
   show_widget: Show widget on support site
