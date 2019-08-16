@@ -1,3 +1,6 @@
+# This file is configured for the Digital Ocean install described at
+# http://support.helpy.io/en/knowledgebase/11-Installing-Helpy/docs/1-Installing-Helpy-on-Digital-Ocean
+
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -18,5 +21,6 @@ test:
 production:
   <<: *default
   database: helpy_production
-  username: helpy
-  password: <%= ENV['helpy_DATABASE_PASSWORD'] %>
+  username: helpy 
+  host:     222.168.2.252
+  password: <%= ENV['APP_DATABASE_PASSWORD'] %>

@@ -53,6 +53,6 @@ omniauth:
 #    twitter:
 #      id:
 #      secret:
-#    google_oauth2:
-#      id:
-#      secret:
+   google_oauth2:
+     id: <%= ENV["GOOGLE_CLIENT_ID"] %>
+     secret: <%= ENV["GOOGLE_CLIENT_SECRET"] %>

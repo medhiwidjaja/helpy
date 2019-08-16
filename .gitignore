@@ -22,6 +22,9 @@ config/environments/*.local.yml
 config/settings_bu.yml
 public/uploads
 
+public/assets
+config/local_env.yml
+
 /coverage
 
 *.eml
