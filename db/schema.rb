@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180720173011) do
+ActiveRecord::Schema.define(version: 20190226081206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,15 @@ ActiveRecord::Schema.define(version: 20180720173011) do
 
   add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
   add_index "category_translations", ["locale"], name: "index_category_translations_on_locale", using: :btree
+
+  create_table "departments", force: :cascade do |t|
+    t.string   "name"
+    t.string   "icon"
+    t.string   "description"
+    t.boolean  "active",      default: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "doc_translations", force: :cascade do |t|
     t.integer  "doc_id",           null: false
@@ -179,15 +188,18 @@ ActiveRecord::Schema.define(version: 20180720173011) do
     t.integer  "user_id"
     t.text     "body"
     t.string   "kind"
-    t.boolean  "active",      default: true
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "points",      default: 0
-    t.string   "attachments", default: [],                array: true
+    t.boolean  "active",        default: true
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "points",        default: 0
+    t.string   "attachments",   default: [],                array: true
     t.string   "cc"
     t.string   "bcc"
     t.text     "raw_email"
+    t.integer  "department_id"
   end
+
+  add_index "posts", ["department_id"], name: "index_posts_on_department_id", using: :btree
 
   create_table "searches", force: :cascade do |t|
     t.string   "name"
@@ -323,8 +335,10 @@ ActiveRecord::Schema.define(version: 20180720173011) do
     t.string   "account_number"
     t.string   "priority",               default: "normal"
     t.text     "notes"
+    t.integer  "department_id"
   end
 
+  add_index "users", ["department_id"], name: "index_users_on_department_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
@@ -356,4 +370,6 @@ ActiveRecord::Schema.define(version: 20180720173011) do
     t.datetime "updated_at",                null: false
   end
 
+  add_foreign_key "posts", "departments"
+  add_foreign_key "users", "departments"
 end
