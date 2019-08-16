@@ -99,6 +99,7 @@ class TopicsController < ApplicationController
   end
 
   def new
+    authenticate_user!
     initialize_new_ticket_form_vars
   end
 
