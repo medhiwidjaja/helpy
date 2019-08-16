@@ -1,5 +1,5 @@
 # System Settings
-site_url: http://support.yourdomain.com # This is the URL of your support site
+site_url: http://cbticket.ddns.net # This is the URL of your support site
 
 # Toggle functionality (not fully implemented)
 tickets: true
@@ -30,16 +30,16 @@ recaptcha_api_key: #Enter your api  key
 # Mail specific settings:
 # See http://support.helpy.io/en/knowledgebase/11-Installing-Helpy/docs/14-Setting-up-your-Helpy-installation-to-send-and-receive-email
 
-admin_email: inbound.support@yourdomain.com
-from_email: inbound.support@yourdomain.com # This is the email that will be used for email replies (reply to)
-send_email: false #Send email or not
+admin_email: brightlight@cahayabangsa.org
+from_email: brightlight@cahayabangsa.org # This is the email that will be used for email replies (reply to)
+send_email: true #Send email or not
 
-mail_service: :mandrill # :sendgrid :cloudmailin, :postmark, :mandrill, :mailgun, :sparkpost
-smtp_mail_username: # Enter your SMTP email username
-smtp_mail_password: # Enter your SMTP email password
-mail_smtp: 'smtp.mandrillapp.com' #Enter the server address for your SMTP server
+mail_service: :mailgun # :sendgrid :cloudmailin, :postmark, :mandrill, :mailgun, :sparkpost
+smtp_mail_username: <%= ENV["GOOGLE_MAIL_USERNAME"] %> 
+smtp_mail_password: <%= ENV["GOOGLE_MAIL_PASSWORD"] %>
+mail_smtp: 'smtp.gmail.com' #Enter the server address for your SMTP server
 mail_port: 587 #Enter the port of your SMTP server
-mail_domain: #Enter the heroku.com if you are on heroku, otherwise enter your domain
+mail_domain: 'cahayabangsa.org'
 
 # Omniauth Config
 # You must sign up with each oauth provider you wish to support, uncomment and add the ID and secret

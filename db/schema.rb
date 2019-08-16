@@ -28,12 +28,6 @@ ActiveRecord::Schema.define(version: 20190716202013) do
   add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", unique: true, using: :btree
   add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
 
-  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
-    t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "attachinary_files", force: :cascade do |t|
     t.integer  "attachinariable_id"
     t.string   "attachinariable_type"
@@ -90,6 +84,15 @@ ActiveRecord::Schema.define(version: 20190716202013) do
 
   add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
   add_index "category_translations", ["locale"], name: "index_category_translations_on_locale", using: :btree
+
+  create_table "departments", force: :cascade do |t|
+    t.string   "name"
+    t.string   "icon"
+    t.string   "description"
+    t.boolean  "active",      default: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "doc_translations", force: :cascade do |t|
     t.integer  "doc_id",           null: false
@@ -185,15 +188,18 @@ ActiveRecord::Schema.define(version: 20190716202013) do
     t.integer  "user_id"
     t.text     "body"
     t.string   "kind"
-    t.boolean  "active",      default: true
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "points",      default: 0
-    t.string   "attachments", default: [],                array: true
+    t.boolean  "active",        default: true
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "points",        default: 0
+    t.string   "attachments",   default: [],                array: true
     t.string   "cc"
     t.string   "bcc"
     t.text     "raw_email"
+    t.integer  "department_id"
   end
+
+  add_index "posts", ["department_id"], name: "index_posts_on_department_id", using: :btree
 
   create_table "searches", force: :cascade do |t|
     t.string   "name"
@@ -226,15 +232,8 @@ ActiveRecord::Schema.define(version: 20190716202013) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["context"], name: "index_taggings_on_context", using: :btree
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
   add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy", using: :btree
-  add_index "taggings", ["taggable_id"], name: "index_taggings_on_taggable_id", using: :btree
-  add_index "taggings", ["taggable_type"], name: "index_taggings_on_taggable_type", using: :btree
-  add_index "taggings", ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type", using: :btree
-  add_index "taggings", ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string  "name"
@@ -339,8 +338,10 @@ ActiveRecord::Schema.define(version: 20190716202013) do
     t.string   "priority",               default: "normal"
     t.text     "notes"
     t.string   "status",                 default: "available"
+    t.integer  "department_id"
   end
 
+  add_index "users", ["department_id"], name: "index_users_on_department_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
   add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
@@ -372,4 +373,6 @@ ActiveRecord::Schema.define(version: 20190716202013) do
     t.datetime "updated_at",                null: false
   end
 
+  add_foreign_key "posts", "departments"
+  add_foreign_key "users", "departments"
 end

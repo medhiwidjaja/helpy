@@ -153,6 +153,9 @@ gem "recaptcha", '< 3', require: "recaptcha/rails" # TODO: Update
 
 gem 'best_in_place', '~> 3.1'
 
+# Check email: to require corporate email only when signing up
+gem 'email_check' 
+
 # Add onboarding component
 gem 'helpy_onboarding', git: 'https://github.com/helpyio/helpy_onboarding', branch: 'master'
 gem 'helpy_imap', git: 'https://github.com/helpyio/helpy_imap', branch: 'master'
