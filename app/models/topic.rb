@@ -83,9 +83,10 @@ class Topic < ActiveRecord::Base
 
   before_save :cache_user_name
   acts_as_taggable_on :tags, :teams
+  validates_presence_of :team_list
 
   validates :name, presence: true, length: { maximum: 255 }
-  # validates :user_id, presence: true
+  validates :user_id, presence: true
 
   enum priority: { low: 0, normal: 1, high: 2, very_high: 3 }
 
