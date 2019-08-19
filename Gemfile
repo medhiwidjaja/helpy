@@ -151,10 +151,7 @@ gem "hashid-rails", "~> 1.0"
 gem 'themes_on_rails'
 gem "recaptcha", '< 3', require: "recaptcha/rails" # TODO: Update
 
-gem 'best_in_place', '~> 3.1'
-
-# Check email: to require corporate email only when signing up
-gem 'email_check' 
+gem 'best_in_place', '~> 3.1' 
 
 # Add onboarding component
 gem 'helpy_onboarding', git: 'https://github.com/helpyio/helpy_onboarding', branch: 'master'
