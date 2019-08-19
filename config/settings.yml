@@ -34,12 +34,12 @@ admin_email: brightlight@cahayabangsa.org
 from_email: brightlight@cahayabangsa.org # This is the email that will be used for email replies (reply to)
 send_email: false #Send email or not
 
-mail_service: :mandrill # :sendgrid :cloudmailin, :postmark, :mandrill, :mailgun, :sparkpost
-smtp_mail_username: # Enter your SMTP email username
-smtp_mail_password: # Enter your SMTP email password
-mail_smtp: 'smtp.mandrillapp.com' #Enter the server address for your SMTP server
+mail_service: :mailgun # :sendgrid :cloudmailin, :postmark, :mandrill, :mailgun, :sparkpost
+smtp_mail_username: <%= ENV['SMTP_MAIL_USERNAME'] %>
+smtp_mail_password: <%= ENV['SMTP_MAIL_PASSWORD'] %>
+mail_smtp: 'smtp.gmail.com' #Enter the server address for your SMTP server
 mail_port: 587 #Enter the port of your SMTP server
-mail_domain: #Enter the heroku.com if you are on heroku, otherwise enter your domain
+mail_domain: 'cahayabangsa.org'
 
 # Omniauth Config
 # You must sign up with each oauth provider you wish to support, uncomment and add the ID and secret
@@ -54,5 +54,6 @@ omniauth:
 #      id:
 #      secret:
     google_oauth2:
-      id: 1044153114082-0i687olej0im5c9cevnveqqbbcskj36e.apps.googleusercontent.com
-      secret: gBZoL8MbZNAikHepMbMX0kGl
+      id: <%= ENV['GOOGLE_CLIENT_ID'] %>
+      secret: <%= ENV['GOOGLE_CLIENT_SECRET'] %>
+      whitelisted_domains: "cahayabangsa.org"
