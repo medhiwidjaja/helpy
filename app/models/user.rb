@@ -79,15 +79,6 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true
 
-  # Validate email using email_check gem
-  validates_email :email,
-    check_mx: true, 
-    not_disposable:true, 
-    not_free:true, 
-    not_blacklisted:true,
-    block_special_usernames:true,
-    message: "Please register with your school email"
-
   include Gravtastic
   mount_uploader :profile_image, ProfileImageUploader
 

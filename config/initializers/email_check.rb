@@ -1,1 +1,0 @@
-EmailCheck.whitelisted_domains << 'cahayabangsa.org'
