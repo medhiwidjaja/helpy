@@ -8,6 +8,7 @@
   <%= render partial: 'admin/topics/nav_item', locals: { status: 'new', label: t(:new), count: @new } %>
   <%= render partial: 'admin/topics/nav_item', locals: { status: 'mine', label: t(:mine), count: @mine } %>
   <%= render partial: 'admin/topics/nav_item', locals: { status: 'pending', label: t(:pending), count: @pending } %>
+  <%= render partial: 'admin/topics/nav_item', locals: { status: 'closed', label: t(:closed), count: @closed } %>
   <% if current_user.is_admin? %>
     <li>&nbsp;</li>
     <li>&nbsp;</li>
