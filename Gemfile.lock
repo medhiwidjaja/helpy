@@ -638,8 +638,8 @@ DEPENDENCIES
   devise (<= 5.0.0)
   devise-bootstrap-views
   devise-i18n
+  devise_invitable
   email_reply_trimmer
-  devise_invitable (< 1.7)
   factory_bot_rails
   faker
   fog-aws
