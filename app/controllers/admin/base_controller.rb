@@ -101,6 +101,8 @@ class Admin::BaseController < ApplicationController
       topics_raw = Topic.active.mine(current_user.id).chronologic
     when 'pending'
       topics_raw = Topic.pending.mine(current_user.id).chronologic
+    when 'closed'
+      topics_raw = Topic.closed.mine(current_user.id).chronologic
     else
       topics_raw = topics_raw.where(current_status: @status)
     end
@@ -122,7 +124,7 @@ class Admin::BaseController < ApplicationController
     @open = topics.open.size
     @active = topics.active.size
     @mine = Topic.active.mine(current_user.id).size
-    # @closed = topics.closed.count
+    @closed = topics.mine(current_user.id).closed.count
     @spam = topics.spam.size
     @trash = topics.trash.size
   end
