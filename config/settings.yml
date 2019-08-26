@@ -32,7 +32,7 @@ recaptcha_api_key: #Enter your api  key
 
 admin_email: brightlight@cahayabangsa.org
 from_email: brightlight@cahayabangsa.org # This is the email that will be used for email replies (reply to)
-send_email: false #Send email or not
+send_email: true #Send email or not
 
 mail_service: :mailgun # :sendgrid :cloudmailin, :postmark, :mandrill, :mailgun, :sparkpost
 smtp_mail_username: <%= ENV['SMTP_MAIL_USERNAME'] %>
