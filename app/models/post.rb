@@ -117,19 +117,19 @@ class Post < ActiveRecord::Base
   def notify
     # Handle new private ticket notification:
     if self.kind == "first" && self.topic.private?
-      NotificationMailer.new_private(self.topic_id).deliver_later
+      NotificationMailer.new_private(self.topic_id).deliver_now
     # Handles new public ticket notification:
     elsif self.kind == "first" && self.topic.public?
-      NotificationMailer.new_public(self.topic_id).deliver_later
+      NotificationMailer.new_public(self.topic_id).deliver_now
 
     # Handles customer reply notification:
     elsif self.kind == "reply" && self.user_id == self.topic.user_id && self.topic.private?
-      NotificationMailer.new_reply(self.topic_id).deliver_later
+      NotificationMailer.new_reply(self.topic_id).deliver_now
 
     # Reply from user back to the system
     elsif self.kind == "reply" && self.user_id != self.topic.user_id && self.topic.private?
       I18n.with_locale(self.email_locale) do
-        PostMailer.new_post(id).deliver_later
+        PostMailer.new_post(id).deliver_now
       end
     end
   end
