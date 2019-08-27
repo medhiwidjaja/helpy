@@ -1,5 +1,5 @@
 # System Settings
-site_url: http://cbticket.ddns.net # This is the URL of your support site
+site_url: http://cbticket.viewdns.net # This is the URL of your support site
 
 # Toggle functionality (not fully implemented)
 tickets: true

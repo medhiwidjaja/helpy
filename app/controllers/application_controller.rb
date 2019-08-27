@@ -149,6 +149,7 @@ class ApplicationController < ActionController::Base
         :user_name            => AppSettings["email.smtp_mail_username"].presence,
         :password             => AppSettings["email.smtp_mail_password"].presence,
         :domain               => AppSettings["email.mail_domain"],
+        :authentication       => "plain",
         :enable_starttls_auto => !AppSettings["email.mail_smtp"].in?(["localhost", "127.0.0.1", "::1"])
     }
 
