@@ -37,9 +37,9 @@ send_email: true #Send email or not
 mail_service: :mailgun # :sendgrid :cloudmailin, :postmark, :mandrill, :mailgun, :sparkpost
 smtp_mail_username: <%= ENV['SMTP_MAIL_USERNAME'] %>
 smtp_mail_password: <%= ENV['SMTP_MAIL_PASSWORD'] %>
-mail_smtp: 'smtp.gmail.com' #Enter the server address for your SMTP server
+mail_smtp: 'smtp.mailgun.org' #Enter the server address for your SMTP server
 mail_port: 587 #Enter the port of your SMTP server
-mail_domain: 'cahayabangsa.org'
+mail_domain: 'support.cahayabangsa.org'
 
 # Omniauth Config
 # You must sign up with each oauth provider you wish to support, uncomment and add the ID and secret
