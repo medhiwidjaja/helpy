@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: 'cbcs'
+  api_key: '152985888829988'
+  api_secret: '6Iy1AGE2nRK0ivCyrwkjydQDwIk'
+  enhance_image_tag:
+  static_image_support:
+production:
+  cloud_name: 'cbcs'
+  api_key: '152985888829988'
+  api_secret: '6Iy1AGE2nRK0ivCyrwkjydQDwIk'
+  enhance_image_tag:
+  static_image_support:
+test:
+  cloud_name: 'cbcs'
+  api_key: '152985888829988'
+  api_secret: '6Iy1AGE2nRK0ivCyrwkjydQDwIk'
+  enhance_image_tag:
+  static_image_support: 
