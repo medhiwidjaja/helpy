@@ -103,6 +103,7 @@ class EmailProcessor
       spam_score: spam_score,
       spam_report: spam_report
     )
+    topic.team_list << Settings.groups[token]
 
     if topic.save
       if token.include?("+")
@@ -149,7 +150,6 @@ class EmailProcessor
 
     #clean message
     message = MailExtract.new(raw).body
-
     topic = Forum.first.topics.new(
       name: subject,
       user_id: @user.id,
@@ -158,6 +158,7 @@ class EmailProcessor
       spam_score: spam_score,
       spam_report: spam_report
     )
+    topic.team_list << Settings.groups[token]
 
     if topic.save
       #insert post to new topic
