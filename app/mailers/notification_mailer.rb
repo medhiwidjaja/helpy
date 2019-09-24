@@ -23,6 +23,9 @@ class NotificationMailer < ApplicationMailer
     return if @topic.user.nil?
     return if @topic.spam_score.to_f > AppSettings["email.spam_assassin_filter"].to_f
     
+    # Send only to users in the same group as the topic 
+    notifiable_users = notifiable_users.select{|x| x.team_list.include? @topic.team_list.first} if @topic.team_list.first
+
     @posts = @topic.posts.where.not(id: @topic.posts.last.id).reverse
     @user = @topic.user
     @recipient = notifiable_users.first
