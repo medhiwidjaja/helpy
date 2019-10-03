@@ -42,6 +42,7 @@ class Admin::TopicsController < Admin::BaseController
     get_tickets_by_status
     team_tag_ids = ActsAsTaggableOn::Tagging.all.where(context: "teams").includes(:tag).map{|tagging| tagging.tag.id }.uniq
     @teams = ActsAsTaggableOn::Tag.where("id IN (?)", team_tag_ids)
+    @view = params[:view]
     tracker("Admin-Nav", "Click", @status.titleize)
   end
 

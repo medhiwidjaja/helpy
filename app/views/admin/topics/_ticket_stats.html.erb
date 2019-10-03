@@ -1,18 +1,44 @@
 
 <div class="left-nav-header">
   <span class="tiny-header"><%= t('inbox')%></span>
+  <span style="display: inline; float: right">
+  Showing
+  <% if @view == "mine" || @view == nil %>
+    my tickets |
+    <%= link_to "All", admin_topics_path(view:"team") %>
+  <% else %>
+    all tickets |
+    <%= link_to "Mine", admin_topics_path(view:"mine") %>
+  <% end %>
+</span>
   <%= hide_responsive_nav %>
 </div>
-<ul class="list-unstyled nav-items"  data-hook="ticket-stats">
-  <%= render partial: 'admin/topics/nav_item', locals: { status: 'active', label: t(:active), count: @active } %>
-  <%= render partial: 'admin/topics/nav_item', locals: { status: 'new', label: t(:new), count: @new } %>
-  <%= render partial: 'admin/topics/nav_item', locals: { status: 'mine', label: t(:mine), count: @mine } %>
-  <%= render partial: 'admin/topics/nav_item', locals: { status: 'pending', label: t(:pending), count: @pending } %>
-  <%= render partial: 'admin/topics/nav_item', locals: { status: 'closed', label: t(:closed), count: @closed } %>
-  <% if current_user.is_admin? %>
-    <li>&nbsp;</li>
-    <li>&nbsp;</li>
-    <%= render partial: 'admin/topics/nav_item', locals: { status: 'spam', label: t(:spam), count: @spam } %>
-    <%= render partial: 'admin/topics/nav_item', locals: { status: 'trash', label: t(:trash), count: @trash } %>
-  <% end %>
-</ul>
+<% if params[:view] == "mine" || params[:view] == nil %>
+  <ul class="list-unstyled nav-items" id="my-tickets" data-hook="ticket-stats">
+    <%= render partial: 'admin/topics/nav_item', locals: { status: 'active', label: t(:active), count: @active, view: @view } %>
+    <%= render partial: 'admin/topics/nav_item', locals: { status: 'new', label: t(:new), count: @new, view: @view } %>
+    <%= render partial: 'admin/topics/nav_item', locals: { status: 'mine', label: t(:mine), count: @mine, view: @view } %>
+    <%= render partial: 'admin/topics/nav_item', locals: { status: 'pending', label: t(:pending), count: @pending, view: @view } %>
+    <%= render partial: 'admin/topics/nav_item', locals: { status: 'closed', label: t(:closed), count: @closed, view: @view } %>
+    <% if current_user.is_admin? %>
+      <li>&nbsp;</li>
+      <li>&nbsp;</li>
+      <%= render partial: 'admin/topics/nav_item', locals: { status: 'spam', label: t(:spam), count: @spam } %>
+      <%= render partial: 'admin/topics/nav_item', locals: { status: 'trash', label: t(:trash), count: @trash } %>
+    <% end %>
+  </ul>
+<% else %>
+  <ul class="list-unstyled nav-items" id="team-tickets" data-hook="ticket-stats">
+    <%= render partial: 'admin/topics/nav_item', locals: { status: 'active', label: t(:active), count: @active, view: @view } %>
+    <%= render partial: 'admin/topics/nav_item', locals: { status: 'new', label: t(:new), count: @new, view: @view } %>
+    <%= render partial: 'admin/topics/nav_item', locals: { status: 'mine', label: t(:mine), count: @mine, view: @view } %>
+    <%= render partial: 'admin/topics/nav_item', locals: { status: 'pending', label: t(:pending), count: @team_pending, view: @view } %>
+    <%= render partial: 'admin/topics/nav_item', locals: { status: 'closed', label: t(:closed), count: @team_closed, view: @view } %>
+    <% if current_user.is_admin? %>
+      <li>&nbsp;</li>
+      <li>&nbsp;</li>
+      <%= render partial: 'admin/topics/nav_item', locals: { status: 'spam', label: t(:spam), count: @spam } %>
+      <%= render partial: 'admin/topics/nav_item', locals: { status: 'trash', label: t(:trash), count: @trash } %>
+    <% end %>
+  </ul>
+<% end %>

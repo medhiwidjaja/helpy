@@ -100,9 +100,17 @@ class Admin::BaseController < ApplicationController
     when 'mine'
       topics_raw = Topic.active.mine(current_user.id).chronologic
     when 'pending'
-      topics_raw = Topic.pending.mine(current_user.id).chronologic
+      if params[:view] == 'mine' || params[:view].nil? 
+        topics_raw = Topic.pending.mine(current_user.id).chronologic
+      else 
+        topics_raw = Topic.pending.tagged_with(current_user.team_list, any: true).chronologic
+      end
     when 'closed'
-      topics_raw = Topic.closed.mine(current_user.id).chronologic
+      if params[:view] == 'mine' || params[:view].nil? 
+        topics_raw = Topic.closed.mine(current_user.id).chronologic
+      else
+        topics_raw = Topic.closed.tagged_with(current_user.team_list, any: true).chronologic
+      end      
     else
       topics_raw = topics_raw.where(current_status: @status)
     end
@@ -121,10 +129,12 @@ class Admin::BaseController < ApplicationController
     @new = topics.unread.size
     @unread = topics.unread.size
     @pending = Topic.mine(current_user.id).pending.size
+    @team_pending = Topic.pending.tagged_with(current_user.team_list, any: true).count
     @open = topics.open.size
     @active = topics.active.size
     @mine = Topic.active.mine(current_user.id).size
     @closed = topics.mine(current_user.id).closed.count
+    @team_closed = Topic.closed.tagged_with(current_user.team_list, any: true).count
     @spam = topics.spam.size
     @trash = topics.trash.size
   end
