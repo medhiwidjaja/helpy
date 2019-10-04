@@ -4,11 +4,16 @@
   <%= hide_responsive_nav %>
 </div>
 <ul class="list-unstyled nav-items"  data-hook="ticket-stats">
-  <%= render partial: 'admin/topics/nav_item', locals: { status: 'active', label: t(:active), count: @active } %>
-  <%= render partial: 'admin/topics/nav_item', locals: { status: 'new', label: t(:new), count: @new } %>
-  <%= render partial: 'admin/topics/nav_item', locals: { status: 'mine', label: t(:mine), count: @mine } %>
-  <%= render partial: 'admin/topics/nav_item', locals: { status: 'pending', label: t(:pending), count: @pending } %>
-  <%= render partial: 'admin/topics/nav_item', locals: { status: 'closed', label: t(:closed), count: @closed } %>
+  <li class="list-header">Active:</li>
+  <%= render partial: 'admin/topics/nav_item', locals: { status: 'active', label: t(:active), count: @active, view: 'mine' } %>
+  <%= render partial: 'admin/topics/nav_item', locals: { status: 'new', label: t(:new), count: @new, view: 'mine' } %>
+  <li class="list-header">My tickets:</li>
+  <%= render partial: 'admin/topics/nav_item', locals: { status: 'mine', label: t(:mine), count: @mine, view: 'mine' } %>
+  <%= render partial: 'admin/topics/nav_item', locals: { status: 'pending', label: t(:pending), count: @pending, view: 'mine' } %>
+  <%= render partial: 'admin/topics/nav_item', locals: { status: 'closed', label: t(:closed), count: @closed, view: 'mine' } %>
+  <li class="list-header">All team's tickets:</li>
+  <%= render partial: 'admin/topics/nav_item', locals: { status: 'pending', label: t(:pending), count: @team_pending, view: 'team' } %>
+  <%= render partial: 'admin/topics/nav_item', locals: { status: 'closed', label: t(:closed), count: @team_closed, view: 'team' } %>
   <% if current_user.is_admin? %>
     <li>&nbsp;</li>
     <li>&nbsp;</li>
