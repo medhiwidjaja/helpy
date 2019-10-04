@@ -3,7 +3,21 @@
   <span class="tiny-header"><%= t('inbox')%></span>
   <%= hide_responsive_nav %>
 </div>
+<ul class="list-unstyled nav-items"  data-hook="ticket-stats">
+  <%= render partial: 'admin/topics/nav_item', locals: { status: 'active', label: t(:active), count: @active } %>
+  <%= render partial: 'admin/topics/nav_item', locals: { status: 'new', label: t(:new), count: @new } %>
+  <%= render partial: 'admin/topics/nav_item', locals: { status: 'mine', label: t(:mine), count: @mine } %>
+  <%= render partial: 'admin/topics/nav_item', locals: { status: 'pending', label: t(:pending), count: @pending } %>
+  <%= render partial: 'admin/topics/nav_item', locals: { status: 'closed', label: t(:closed), count: @closed } %>
+  <% if current_user.is_admin? %>
+    <li>&nbsp;</li>
+    <li>&nbsp;</li>
+    <%= render partial: 'admin/topics/nav_item', locals: { status: 'spam', label: t(:spam), count: @spam } %>
+    <%= render partial: 'admin/topics/nav_item', locals: { status: 'trash', label: t(:trash), count: @trash } %>
+  <% end %>
+</ul>
 
+<div class='hidden'>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">My tickets</a>
@@ -12,9 +26,10 @@
     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">All tickets</a>
   </li>
 </ul>
+
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane <%= 'active' if params[:view]=='mine' %>" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <div class="tab-headline">Showing my tickets</div>
+  <div class="tab-pane <%= 'active' if params[:view]=='mine' || params[:view]=='' %>" id="home" role="tabpanel" aria-labelledby="home-tab">
+    
     <ul class="list-unstyled nav-items" id="my-tickets" data-hook="ticket-stats">
       <%= render partial: 'admin/topics/nav_item', locals: { status: 'active', label: t(:active), count: @active, view: 'mine' } %>
       <%= render partial: 'admin/topics/nav_item', locals: { status: 'new', label: t(:new), count: @new, view: 'mine' } %>
@@ -47,3 +62,4 @@
   </div>
 </div>
 
+</div>
