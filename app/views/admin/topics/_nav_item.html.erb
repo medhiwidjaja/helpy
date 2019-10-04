@@ -1,5 +1,5 @@
 <li class="text-left nav-item ticket-nav-<%= status %> <%= 'more-important nav-active' if @status == status %>">
   <%= content_tag :div, count, class: 'pull-right' %>
-  <%= link_to "#{label}", admin_topics_path(:status => status, :view => view), :remote => true,
+  <%= link_to "#{label}", admin_topics_path(:status => status, :view => @view), :remote => true,
   class: "pipeline-#{status}" %>
 </li>
