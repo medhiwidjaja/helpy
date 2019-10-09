@@ -85,7 +85,7 @@ class Topic < ActiveRecord::Base
 
   before_save :cache_user_name
   acts_as_taggable_on :tags, :teams
-  validates_presence_of :team_list
+  validates_presence_of :team_list, if: Proc.new {|topic| [nil, 0].include? topic.doc_id }
 
   validates :name, presence: true, length: { maximum: 255 }
   validates :user_id, presence: true
@@ -233,6 +233,7 @@ class Topic < ActiveRecord::Base
     @merge_topics = Topic.where(id: topic_ids)
     @topic = @merge_topics.first.dup
     @topic.name = "MERGED: #{@merge_topics.first.name}"
+    @topic.team_list << @merge_topics.map(&:team_list).uniq.flatten
     topics_merged = ""
 
     if @topic.save

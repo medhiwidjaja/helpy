@@ -180,10 +180,10 @@ class TopicTest < ActiveSupport::TestCase
   end
 
   test "Should be able to merge two topics and copy posts" do
-    topica = Topic.create(name: "message A", user_id: 1, forum_id: 1, private: true)
+    topica = Topic.create(name: "message A", user_id: 1, forum_id: 1, private: true, team_list: 'something')
     topica.posts.create(kind: 'first', body: 'message A first', user_id: 1)
     topica.posts.create(kind: 'reply', body: 'message A reply', user_id: 1)
-    topicb = Topic.create(name: "message B", user_id: 1, forum_id: 1, private: true)
+    topicb = Topic.create(name: "message B", user_id: 1, forum_id: 1, private: true, team_list: 'something')
     topicb.posts.create(kind: 'first', body: 'message B first', user_id: 1)
     topicb.posts.create(kind: 'reply', body: 'message B reply', user_id: 1)
 
