@@ -1,7 +1,7 @@
 class Admin::ReportsController < Admin::BaseController
 
   include StatsHelper
-  before_action :verify_admin
+  before_action :verify_agent
   before_action :get_all_teams
 
   before_action :date_from_params
